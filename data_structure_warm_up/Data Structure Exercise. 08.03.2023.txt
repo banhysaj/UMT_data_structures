@@ -1,0 +1,170 @@
+1) Write a function (findUnique) that takes a list of strings as input and returns a new list
+containing only the unique strings from the original list, in the order they first appear
+
+
+import java.util.*;
+import java.util.Scanner;
+
+public class Main {
+    public static List<String> findUnique(List<String> stringList) {
+        List<String> Lista2 = new ArrayList<>();
+        for (String string : stringList) {
+            if (!Lista2.contains(string)) {
+                Lista2.add(string);
+            }
+        }
+        return Lista2;
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the number of words: ");
+        int m = sc.nextInt();
+        String[] array = new String[m];
+        System.out.println("Enter the words: ");
+        for(int i=0; i<m; i++){
+            array[i]=sc.next();
+        }
+        List<String> stringList = new ArrayList<>();
+       for(String element: array){
+           stringList.add(element);
+       }
+        List<String> Listaunike = findUnique(stringList);
+        System.out.println(Listaunike);
+    }
+}
+
+____________________________________________________________________________________________________________________________________
+
+2) Write a function (findEven) that takes a list of integers as input and returns a new list
+containing only the even integers from the original list, in the order they first appear.
+
+
+import java.util.*;
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Main {
+    public static List<Integer> findEven(List<Integer> Nr) {
+        List<Integer> EvenNr = new ArrayList<Integer>();
+        for (int num : Nr) {
+            if (num % 2 == 0) {
+                EvenNr.add(num);
+            }
+        }
+
+        return EvenNr;
+    }
+
+    public static void main(String[] args) {
+        List<Integer> numbers = new ArrayList<Integer>();
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the Numbers: ");
+
+        String input = sc.nextLine();
+
+        for(String n : input.split(" ")){
+            numbers.add(Integer.parseInt(n));
+        }
+        List<Integer> evenNumbers = findEven(numbers);
+        System.out.println("The even numbers: " + evenNumbers);
+    }
+}
+
+_________________________________________________________________________________________________________________________________________________
+
+
+
+3) Write a function (findKthSmallest) that takes a list of integers as input and returns the
+k-th smallest integer in the list, where k is an integer parameter passed to the function.
+
+
+
+import java.util.*;
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Main {
+    public static int findKthSmallest(int[] numbers, int k){
+        if(numbers.length==0 || k>numbers.length){
+            throw new IllegalArgumentException("Invalid input");
+        }
+        Arrays.sort(numbers);
+        return numbers[k-1];
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("How many numbers do you want to enter? ");
+        int j=sc.nextInt();
+        int [] numbers = new int[j];
+        System.out.println("Enter the numbers: ");
+        for(int i=0; i < j; i++){
+            numbers[i]=sc.nextInt();
+        }
+        System.out.println("Enter value of K: ");
+        int k = sc.nextInt();
+
+        int KthSmallest = findKthSmallest(numbers, k);
+        System.out.println(KthSmallest);
+    }
+}
+
+__________________________________________________________________________________________________________----
+
+
+5) Write a Java program that takes a list of integers as input and returns the longest subsequence of consecutive integers in the list. For example, if the input list is [3, 2, 3, 5, 4, 8,
+9, 10], the program should return [8, 9, 10].
+
+
+import java.util.Set;
+import java.util.*;
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Main {
+    public static List<Integer> findLongestConsecutiveSubsequence(List<Integer> nums) {
+        Set<Integer> numSet = new HashSet<>(nums);
+        int maxlength = 0;
+        List<Integer> longestSubsequence = new ArrayList<>();
+        for (int num : nums) {
+            if (!numSet.contains(num - 1)) {
+                int currNum = num;
+                int currlength = 1;
+                while (numSet.contains(currNum + 1)) {
+                    currNum++;
+                    currlength++;
+                }
+                if (currlength > maxlength) {
+                    maxlength = currlength;
+                    longestSubsequence.clear();
+                    for (int i = num; i <= currNum; i++) {
+                        longestSubsequence.add(i);
+                    }
+                }
+            }
+        }
+        return longestSubsequence;
+    }
+    public static void main(String[] args) {
+        List<Integer> numbers = new ArrayList<Integer>();
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the Numbers: ");
+
+        String input = sc.nextLine();
+
+        for(String n : input.split(" ")){
+            numbers.add(Integer.parseInt(n));
+        }
+
+        List<Integer> SubsequentNr = findLongestConsecutiveSubsequence(numbers);
+        System.out.println("Th the longest subsequence of consecutive integers is: " + SubsequentNr);
+    }
+}
+
